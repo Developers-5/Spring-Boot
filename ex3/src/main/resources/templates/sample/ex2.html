@@ -41,12 +41,21 @@
     </ul>
 
     <div>====================================================================================</div>
-    <h1>CSS Class </h1>
+    <h1>CSS Class</h1>
     <ul>
         <li th:each="dto, state: ${list}"
             th:class="${dto.sno % 5 == 0} ? 'target'"
             th:text="${dto}"></li>
     </ul>
+
+    <div>====================================================================================</div>
+    <h1>th block</h1>
+    <ul>
+        <th:block th:each="dto: ${list}">
+            <li th:text="${dto.sno % 5 == 0} ? ${dto.sno} : ${dto.first}"></li>
+        </th:block>
+    </ul>
+
 </body>
 <style>
     .target{
