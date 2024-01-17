@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 @Controller
 @RequestMapping("/sample")
@@ -23,9 +24,9 @@ public class SampleController {
         log.info("ex1................");
     }
 
-    @GetMapping({"/ex2", "/another"})
+    @GetMapping({"/ex2", "/exLink", "/another"})
     public void exModel(Model model){
-        List<SampleDTO> list = IntStream.rangeClosed(1, 20).asLongStream()
+        List<SampleDTO> list = LongStream.rangeClosed(1, 20)
                 .mapToObj( i -> {
                     return SampleDTO.builder()
                             .sno(i)
