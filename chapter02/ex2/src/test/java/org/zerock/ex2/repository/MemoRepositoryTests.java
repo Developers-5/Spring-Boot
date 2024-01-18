@@ -1,5 +1,6 @@
 package org.zerock.ex2.repository;
 
+import com.sun.jna.platform.unix.X11;
 import jakarta.transaction.Transactional;
 import org.hibernate.annotations.SQLJoinTableRestriction;
 import org.junit.jupiter.api.Test;
@@ -10,8 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableArgumentResolver;
+import org.springframework.test.annotation.Commit;
 import org.zerock.ex2.entity.Memo;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -138,6 +141,55 @@ public class MemoRepositoryTests {
         for(Memo memo : list) {
             System.out.println(memo);
         }
+    }
+
+    @Test
+    public void testQueryMethodWithPageable() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("Mno").descending());
+
+        Page<Memo> result = memoRepository.findByMnoBetween(10L, 50L, pageable);
+
+        result.get().forEach(memo -> System.out.println(memo));
+    }
+
+    @Commit
+    @Transactional
+    @Test
+    public void testDeleteQueryMethods() {
+        memoRepository.deleteMemoByMnoLessThan(10L);
+    }
+
+    @Test
+    public void testUpdateMemoText() {
+        memoRepository.updateMemoText(15L, "안녕");
+    }
+
+    @Test
+    public void textUpdateMemoText2() {
+        Memo memo = new Memo().builder().mno(20L).memoText("오렌지").build();
+        memoRepository.updateMemoText2(memo);
+    }
+
+    @Test
+    public void getLListWithQuery() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page result = memoRepository.getListWithQuery(10L, pageable);
+
+        result.get().forEach(memo -> System.out.println(memo));
+    }
+
+    @Test
+    public void getListWithQueryObejct() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page result = memoRepository.getListWithQueryObejct(20L, pageable);
+
+        result.get().forEach(memo -> System.out.println(memo));
+    }
+
+    @Test
+    public void getNativeResult() {
+        List<Object[]> result = memoRepository.getNativeResult();
+        result.forEach(memo -> System.out.println(memo));
     }
 
 
