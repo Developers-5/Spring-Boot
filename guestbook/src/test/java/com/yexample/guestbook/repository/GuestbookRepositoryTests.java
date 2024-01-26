@@ -1,6 +1,8 @@
 package com.yexample.guestbook.repository;
 
 import com.yexample.guestbook.GuestbookApplication;
+import com.yexample.guestbook.dto.GuestbookDTO;
+import com.yexample.guestbook.dto.PageRequestDTO;
 import com.yexample.guestbook.entity.Guestbook;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
