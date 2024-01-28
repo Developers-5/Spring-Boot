@@ -9,6 +9,12 @@ public interface GuestbookService {
 
     Long register(GuestbookDTO dto);
 
+    GuestbookDTO read(Long gno);
+
+    void remove(Long gno);
+
+    void modify(GuestbookDTO dto);
+
     default Guestbook dtoToEntity(GuestbookDTO dto){
         return Guestbook.builder()
                 .gno(dto.getGno())

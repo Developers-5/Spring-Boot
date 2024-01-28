@@ -340,6 +340,11 @@ label {
   display: inline-block;
 }
 
+button.close{
+  background-color: white;
+  border:none;
+}
+
 button {
   border-radius: 0;
 }
