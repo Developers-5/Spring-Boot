@@ -6,8 +6,10 @@
 
         <form action="/guestbook/modify" method="post">
 
-            <!-- 페이지 번호 -->
+            <!-- 페이지 번호, 검색조건 -->
             <input type="hidden" name="page" th:value="${requestDTO.page}">
+            <input type="hidden" name="type" th:value="${requestDTO.type}">
+            <input type="hidden" name="keyword" th:value="${requestDTO.keyword}">
 
             <div class="form-group">
                 <label>Gno</label>
@@ -63,9 +65,15 @@
             });
 
             $(".listBtn").click(() => {
-                const pageInfo = $("input[name='page']")
+                const page = $("input[name='page']")
+                const type = $("input[name='type']")
+                const keyword = $("input[name='keyword']")
+
+
                 actionForm.empty(); // form 의 정보 리셋
-                actionForm.append(pageInfo)
+                actionForm.append(page)
+                actionForm.append(type)
+                actionForm.append(keyword)
                 actionForm
                     .attr("action", "/guestbook/list")
                     .attr("method", "get");

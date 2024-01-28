@@ -56,4 +56,25 @@ public class GuestbookServiceTests {
         resultDto.getPageList().forEach(log::info);
     }
 
+    @Test
+    public void testSearch(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .type("content")
+                .keyword("내용 검색어")
+                .build();
+
+        PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(pageRequestDTO);
+
+        log.info("PREV: " + resultDTO.isPrev());
+        log.info("NEXT: " + resultDTO.isNext());
+        log.info("TOTAL: " + resultDTO.getTotalPage());
+        log.info("=======================================");
+
+        resultDTO.getDtoList().forEach(log::info);
+        log.info("=======================================");
+
+        resultDTO.getPageList().forEach(log::info);
+    }
 }
